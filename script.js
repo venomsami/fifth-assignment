@@ -83,4 +83,41 @@ document.addEventListener('DOMContentLoaded', () => {
         addToCallHistory(serviceName, serviceNumber);
     };
 
-    
+    /**
+     * Adds a new entry to the call history section.
+     */
+    const addToCallHistory = (name, number) => {
+        const callTime = new Date().toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        });
+
+        const historyItem = document.createElement('div');
+        historyItem.classList.add('history-item');
+        historyItem.innerHTML = `
+            <div>
+                <p class="service-name">${name}</p>
+                <p>${number}</p>
+            </div>
+            <p class="call-time">${callTime}</p>
+        `;
+        historyListEl.prepend(historyItem); 
+    };
+
+    /**
+     * Clears all entries from the call history.
+     */
+    const handleClearHistory = () => {
+        historyListEl.innerHTML = '';
+    };
+
+    // --- EVENT LISTENERS ---
+    allHeartBtns.forEach(btn => btn.addEventListener('click', handleHeartClick));
+    allCopyBtns.forEach(btn => btn.addEventListener('click', handleCopyClick));
+    allCallBtns.forEach(btn => btn.addEventListener('click', handleCallClick));
+    clearHistoryBtn.addEventListener('click', handleClearHistory);
+
+    // --- INITIALIZATION ---
+    updateCountersUI(); 
+});
