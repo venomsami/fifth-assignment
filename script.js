@@ -62,5 +62,25 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    
+    /**
+     * Handles clicking the call button on a card.
+     */
+    const handleCallClick = (event) => {
+        if (coinCount < CALL_COST) {
+            alert("You don't have enough coins to make a call!");
+            return;
+        }
+
+        coinCount -= CALL_COST;
+        updateCountersUI();
+
+        const card = event.currentTarget.closest('.card');
+        const serviceName = card.querySelector('.service-name').textContent;
+        const serviceNumber = card.querySelector('.service-number').textContent;
+
+        alert(`Calling ${serviceName} at ${serviceNumber}`);
+
+        addToCallHistory(serviceName, serviceNumber);
+    };
+
     
