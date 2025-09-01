@@ -43,5 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    /**
+     * Handles clicking the copy button on a card.
+     */
+    const handleCopyClick = (event) => {
+        const card = event.currentTarget.closest('.card');
+        const numberToCopy = card.querySelector('.service-number').textContent;
+
+        navigator.clipboard.writeText(numberToCopy)
+            .then(() => {
+                alert(`Copied "${numberToCopy}" to clipboard!`);
+                copyCount++;
+                updateCountersUI();
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy number.');
+            });
+    };
+
     
     
